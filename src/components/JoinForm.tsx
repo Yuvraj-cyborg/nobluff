@@ -20,9 +20,10 @@ export default function JoinForm() {
 
     setEmail('')
     alert('Submitted!')
-  } catch (error: any) {
-    console.error('Submission failed:', error.message)
-    alert(`Error: ${error.message}`)
+  } catch (error: unknown) {
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error'
+    console.error('Submission failed:', errorMessage)
+    alert(`Error: ${errorMessage}`)
   }
 }
 

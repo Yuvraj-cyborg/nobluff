@@ -18,8 +18,9 @@ export async function POST(req: NextRequest) {
 
     const result = await response.text()
     return NextResponse.json({ message: result })
-  } catch (err: any) {
+  } catch (err: unknown) {
     console.error('API Route Error:', err)
-    return NextResponse.json({ message: err.message || 'Server error' }, { status: 500 })
+    const errorMessage = err instanceof Error ? err.message : 'Server error'
+    return NextResponse.json({ message: errorMessage }, { status: 500 })
   }
 }
